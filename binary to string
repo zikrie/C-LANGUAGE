@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<sys/stat.h>
+
+int main()
+{
+	struct stat a;
+	stat("string.txt" ,&a);
+	int size = (a.st_size-1);
+	//printf("%d",size);//check value
+	unsigned char buffer[size];
+
+	FILE *ptr = fopen("binary.bin","rb");  // r for read, b for binary
+	fread(buffer,sizeof(buffer),1,ptr); // read 10 bytes to our buffer
+
+	FILE *t = fopen("reverse.txt","w");
+	for(int i = size-1; i>=0; i--)
+    	{
+		printf("%c", buffer[i]); // prints a series of bytes c untuk char d untuk binary
+		fprintf(t,"%c",buffer[i]);
+	}
+	fclose(ptr);
+	fclose(t);
+
+}
