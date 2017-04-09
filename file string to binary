@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<sys/stat.h>
+
+int main()
+{
+	struct stat a;
+	stat("string.txt" ,&a);
+	int size = (a.st_size-1);
+	//printf("%d",size);//check value
+	unsigned char buffer[size];	
+	
+	FILE *k = fopen("string.txt","r"); // read string
+	fread(buffer,sizeof(buffer),1,k); 
+
+	FILE *write_ptr = fopen("binary.bin","wb");  // w for write, b for binary , create binary file 
+	fwrite(buffer,sizeof(buffer),1,write_ptr);
+
+
+
+	fclose(write_ptr);
+	fclose(k);
+}
